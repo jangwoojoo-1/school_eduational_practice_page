@@ -3,13 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello, World! - 정보 교생쌤의 특별 세션</title>
+    <title>🎉 1학년 11반, 레벨업을 축하해! 🎉</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=GmarketSansMedium&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <style>
-        /* 전체 화면 레이아웃 및 정보 교과 다크 모드 스타일 설정 */
+        /* --- 전체적인 밝고 경쾌한 스타일 정의 --- */
+        :root {
+            --primary-color: #ff7675; /* 따뜻한 코랄 핑크 */
+            --secondary-color: #74b9ff; /* 산뜻한 하늘색 */
+            --bg-color: #f9faff; /* 아주 밝은 푸른빛 회색 바탕 */
+            --card-bg: #ffffff;
+            --text-color: #2d3436;
+        }
+
         body {
-            background-color: #0d1117;
-            color: #c9d1d9;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'GmarketSansMedium', sans-serif; /* 폰트 적용 */
             margin: 0;
             display: flex;
             justify-content: center;
@@ -17,115 +30,197 @@
             min-height: 100vh;
             padding: 20px;
             box-sizing: border-box;
+            overflow-x: hidden; /* 폭죽 효과 시 스크롤 방지 */
         }
-        .event-card {
-            max-width: 550px;
-            width: 100%;
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-            text-align: center;
-        }
-        /* 메인 배너: 성공적인 종료를 뜻하는 HTTP 상태 코드 테마 */
-        .main-banner {
-            background: linear-gradient(135deg, #1f6feb, #238636);
-            padding: 22px;
-            border-radius: 8px;
-            color: #ffffff;
-            font-weight: bold;
-            font-size: 1.35rem;
-            margin-bottom: 25px;
-            border-left: 6px solid #58a6ff;
-            box-shadow: 0 4px 10px rgba(31, 111, 235, 0.2);
-        }
-        /* 코드 에디터 스타일의 텍스트 박스 */
-        .code-snippet {
-            background: #010409;
-            border: 1px solid #21262d;
-            border-radius: 8px;
-            padding: 18px;
-            text-align: left;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            overflow-x: auto;
-            margin-bottom: 25px;
-        }
-        .keyword { color: #ff7b72; }
-        .function { color: #d2a8ff; }
-        .string { color: #a5d6ff; }
-        .comment { color: #8b949e; font-style: italic; }
 
-        /* 버튼 및 결과 출력 영역 */
-        .run-btn {
-            background-color: #238636;
-            color: #ffffff;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 6px;
+        /* --- 축하 카드 스타일 --- */
+        .celebration-card {
+            max-width: 600px;
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 30px; /* 아주 둥글게 */
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(116, 185, 255, 0.15); /* 부드러운 파란 그림자 */
+            text-align: center;
+            border: 4px solid #fff; /* 흰색 테두리로 강조 */
+            outline: 4px solid var(--secondary-color); /* 하늘색 이중 테두리 효과 */
+            position: relative;
+        }
+
+        /* --- 상단 제목 영역 --- */
+        .header-title {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px rgba(255, 118, 117, 0.2);
+        }
+
+        .sub-title {
+            font-size: 1.1rem;
+            color: #636e72;
+            margin-bottom: 35px;
+        }
+
+        /* --- 정보 교과 컨셉을 살린 귀여운 로직 블록 --- */
+        .logic-flow {
+            background: #f1f2f6;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: left;
+            margin-bottom: 35px;
+            border-left: 10px solid var(--secondary-color);
+        }
+
+        .block {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
             font-size: 1rem;
             font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
         }
-        .run-btn:hover { background-color: #2ea043; }
-        .run-btn:active { transform: scale(0.98); }
-        .output-box {
-            margin-top: 25px;
-            padding: 20px;
-            background: #21262d;
-            border: 1px dashed #7ee787;
-            border-radius: 8px;
-            display: none;
-            font-size: 1.05rem;
-            line-height: 1.6;
-            color: #58a6ff;
+
+        .start-block { background-color: #ffeaa7; color: #d63031; } /* 시작 */
+        .process-block { background-color: #dff9fb; color: #0984e3; margin-left: 20px;} /* 과정 */
+        .loop-block { background-color: #fab1a0; color: #e17055; margin-left: 20px;} /* 반복 */
+        .end-block { background-color: #b2bec3; color: #2d3436; } /* 종료 */
+
+        .logic-text {
+            color: #2d3436;
+            margin-left: 10px;
+        }
+
+        /* --- 강력한 폭죽 이펙트 버튼 --- */
+        .celebrate-btn {
+            background: linear-gradient(45deg, var(--primary-color), #ff9f43);
+            color: #ffffff;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 118, 117, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .celebrate-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(255, 118, 117, 0.5);
+        }
+
+        .celebrate-btn:active {
+            transform: translateY(2px);
+        }
+
+        /* --- 숨겨진 최종 메시지 영역 --- */
+        .final-message {
+            margin-top: 35px;
+            padding: 25px;
+            background-color: #fff9db;
+            border-radius: 20px;
+            border: 2px dashed #f1c40f;
+            display: none; /* 초기에는 숨김 */
+            animation: slideUp 0.5s ease; /* 나타날 때 애니메이션 */
             text-align: left;
         }
-        .highlight-text { color: #7ee787; font-weight: bold; }
+
+        .final-message h3 {
+            color: #e67e22;
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .final-message p {
+            line-height: 1.8;
+            color: #4b4b4b;
+            margin: 0;
+        }
+
+        /* 나타나는 애니메이션 정의 */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
     </style>
 </head>
 <body>
-<div class="event-card">
-    <div class="main-banner">
-        Status 200: 1학년 11반 실습 성공적으로 완료! 🎉
+    <div class="celebration-card">
+        <h1 class="header-title">Hello, 1학년 11반!</h1>
+        <p class="sub-title">정보 교생 선생님의 마지막 특별 세션에 오신 걸 환영해요.</p>
+
+        <div class="logic-flow">
+            <div><span class="block start-block">START</span> <span class="logic-text">실습 대장정의 시작!</span></div>
+            <div><span class="block process-block">INPUT</span> <span class="logic-text">너희들의 초롱초롱한 눈빛</span></div>
+            <div><span class="block loop-block">REPEAT</span> <span class="logic-text">매주 즐거웠던 정보 수업 (무한 반복)</span></div>
+            <div style="margin-top:15px;"><span class="block end-block">END</span> <span class="logic-text">성공적인 레벨업 완료!</span></div>
+        </div>
+
+        <button class="celebrate-btn" onclick="celebrate()">🎉 교생쌤의 마지막 선물 열기 🎉</button>
+
+        <div id="finalMessage" class="final-message">
+            <h3>💌 11반에게 전하는 메시지</h3>
+            <p>
+                짜잔! 선물의 정체는 선생님의 진심이 담긴 이 페이지였어. <br><br>
+                짧은 시간이었지만 여러분과 함께 정보 수업을 할 수 있어서 선생님은 정말 행복했단다. <br>
+                혹시 수업 시간이 조금 지루했더라도, 오늘 이 폭죽처럼 즐거운 추억으로 남았으면 좋겠어.<br><br>
+                앞으로도 너희들의 꿈을 향한 컴파일 과정에 에러 없이, <span style="color:var(--primary-color); font-weight:bold;">Build Successful</span>만 가득하기를 쌤이 항상 응원할게!<br>
+                그동안 정말 고마웠어! 안녕! 👋
+            </p>
+        </div>
     </div>
 
-    <div class="code-snippet">
-        <span class="comment"># 1학년 11반 학생들을 위한 응원 알고리즘</span><br>
-        <span class="keyword">def</span> <span class="function">future_of_class_11</span>():<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;passion = <span class="keyword">100</span><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span> <span class="keyword">True</span>:<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"여러분의 앞날에 버그 없이 맑은 날만 있기를!"</span>)<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># 이 응원은 무한 루프입니다.</span><br>
-        <br>
-        <span class="function">future_of_class_11</span>()
-    </div>
+    <script>
+        // --- 버튼 클릭 시 실행되는 함수 ---
+        function celebrate() {
+            // 1. 메시지 상자 보여주기
+            const messageBox = document.getElementById("finalMessage");
+            messageBox.style.display = "block";
 
-    <button class="run-btn" onclick="runCode()">▶ 응원 코드 실행 (Run)</button>
+            // 2. 버튼 텍스트 변경 및 비활성화
+            const btn = document.querySelector(".celebrate-btn");
+            btn.innerText = "✓ 성공적으로 전달됨!";
+            btn.style.background = "#b2bec3";
+            btn.style.cursor = "default";
+            btn.style.boxShadow = "none";
+            btn.disabled = true;
 
-    <div id="outputMessage" class="output-box">
-        > <span class="highlight-text">Build Successful...</span><br><br>
-        짧은 시간이었지만 여러분과 함께해서 정말 즐거웠어!<br>
-        정보 시간마다 반짝이던 눈빛들 잊지 않을게.<br>
-        앞으로도 에러 없는 학교생활 하기를 진심으로 응원해!
-    </div>
-</div>
+            // 3. ✨ 강력한 폭죽 효과 (Confetti) 실행 ✨
+            
+            // 효과 1: 중앙에서 크게 터짐
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { y: 0.6 },
+                colors: ['#ff7675', '#74b9ff', '#55efc4', '#ffeaa7']
+            });
 
-<script>
-    function runCode() {
-        const outputBox = document.getElementById("outputMessage");
-        const btn = document.querySelector(".run-btn");
+            // 효과 2: 0.2초 뒤 왼쪽에서 터짐
+            setTimeout(() => {
+                confetti({
+                    particleCount: 50,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#ff7675', '#74b9ff']
+                });
+            }, 200);
 
-        // 버튼 클릭 시 출력 박스를 보여주고, 버튼 텍스트 변경
-        outputBox.style.display = "block";
-        btn.innerText = "✓ 실행 완료 (Executed)";
-        btn.style.backgroundColor = "#2ea043";
-        btn.style.cursor = "default";
-        btn.disabled = true; // 중복 클릭 방지
-    }
-</script>
+            // 효과 3: 0.4초 뒤 오른쪽에서 터짐
+            setTimeout(() => {
+                confetti({
+                    particleCount: 50,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#55efc4', '#ffeaa7']
+                });
+            }, 400);
+        }
+    </script>
 </body>
 </html>

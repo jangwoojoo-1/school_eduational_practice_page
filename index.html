@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello, World! - 정보 교생쌤의 특별 세션</title>
+    <style>
+        /* 전체 화면 레이아웃 및 정보 교과 다크 모드 스타일 설정 */
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .event-card {
+            max-width: 550px;
+            width: 100%;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+        /* 메인 배너: 성공적인 종료를 뜻하는 HTTP 상태 코드 테마 */
+        .main-banner {
+            background: linear-gradient(135deg, #1f6feb, #238636);
+            padding: 22px;
+            border-radius: 8px;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1.35rem;
+            margin-bottom: 25px;
+            border-left: 6px solid #58a6ff;
+            box-shadow: 0 4px 10px rgba(31, 111, 235, 0.2);
+        }
+        /* 코드 에디터 스타일의 텍스트 박스 */
+        .code-snippet {
+            background: #010409;
+            border: 1px solid #21262d;
+            border-radius: 8px;
+            padding: 18px;
+            text-align: left;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin-bottom: 25px;
+        }
+        .keyword { color: #ff7b72; }
+        .function { color: #d2a8ff; }
+        .string { color: #a5d6ff; }
+        .comment { color: #8b949e; font-style: italic; }
+
+        /* 버튼 및 결과 출력 영역 */
+        .run-btn {
+            background-color: #238636;
+            color: #ffffff;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .run-btn:hover { background-color: #2ea043; }
+        .run-btn:active { transform: scale(0.98); }
+        .output-box {
+            margin-top: 25px;
+            padding: 20px;
+            background: #21262d;
+            border: 1px dashed #7ee787;
+            border-radius: 8px;
+            display: none;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #58a6ff;
+            text-align: left;
+        }
+        .highlight-text { color: #7ee787; font-weight: bold; }
+    </style>
+</head>
+<body>
+<div class="event-card">
+    <div class="main-banner">
+        Status 200: 1학년 11반 실습 성공적으로 완료! 🎉
+    </div>
+
+    <div class="code-snippet">
+        <span class="comment"># 1학년 11반 학생들을 위한 응원 알고리즘</span><br>
+        <span class="keyword">def</span> <span class="function">future_of_class_11</span>():<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;passion = <span class="keyword">100</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span> <span class="keyword">True</span>:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"여러분의 앞날에 버그 없이 맑은 날만 있기를!"</span>)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># 이 응원은 무한 루프입니다.</span><br>
+        <br>
+        <span class="function">future_of_class_11</span>()
+    </div>
+
+    <button class="run-btn" onclick="runCode()">▶ 응원 코드 실행 (Run)</button>
+
+    <div id="outputMessage" class="output-box">
+        > <span class="highlight-text">Build Successful...</span><br><br>
+        짧은 시간이었지만 여러분과 함께해서 정말 즐거웠어!<br>
+        정보 시간마다 반짝이던 눈빛들 잊지 않을게.<br>
+        앞으로도 에러 없는 학교생활 하기를 진심으로 응원해!
+    </div>
+</div>
+
+<script>
+    function runCode() {
+        const outputBox = document.getElementById("outputMessage");
+        const btn = document.querySelector(".run-btn");
+
+        // 버튼 클릭 시 출력 박스를 보여주고, 버튼 텍스트 변경
+        outputBox.style.display = "block";
+        btn.innerText = "✓ 실행 완료 (Executed)";
+        btn.style.backgroundColor = "#2ea043";
+        btn.style.cursor = "default";
+        btn.disabled = true; // 중복 클릭 방지
+    }
+</script>
+</body>
+</html>
